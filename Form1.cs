@@ -342,6 +342,21 @@ namespace Управление_ЭВМ
             File.AppendAllText("log.txt", logEntry + Environment.NewLine);
         }
 
+        private void button6_Click(object sender, EventArgs e)
+        {
+            
+            string logPath = Path.Combine(Application.StartupPath, "log.txt");
+
+            // Создаём log.txt, если он ещё не существует
+            if (!File.Exists(logPath))
+            {
+                File.WriteAllText(logPath, ""); // создаём пустой
+            }
+
+            // Открываем папку с выделением файла log.txt
+            Process.Start("explorer.exe", $"/select,\"{logPath}\"");
+        }
 
     }
 }
+
