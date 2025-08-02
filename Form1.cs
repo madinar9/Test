@@ -178,6 +178,8 @@ namespace Управление_ЭВМ
             {
                 MessageBox.Show($"Ошибка печати: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            LogAction("Нажата кнопка: Печать");
+
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -333,5 +335,13 @@ namespace Управление_ЭВМ
             string username = GetWindowsUsername();
             MessageBox.Show($"Имя пользователя: {username}", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
+
+        private void LogAction(string message)
+        {
+            string logEntry = $"[{DateTime.Now:dd.MM.yyyy HH:mm:ss}] {message}";
+            File.AppendAllText("log.txt", logEntry + Environment.NewLine);
+        }
+
+
     }
 }
