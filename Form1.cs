@@ -279,5 +279,48 @@ namespace Управление_ЭВМ
             }
 
         }
+
+        private string GetLocalIPAddress()
+        {
+            string localIP = "Не найден";
+            foreach (var ip in System.Net.Dns.GetHostAddresses(System.Net.Dns.GetHostName()))
+            {
+                if (ip.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+                {
+                    localIP = ip.ToString();
+                    break;
+                }
+            }
+            return localIP;
+        }
+
+        private string GetExternalIPAddress()
+        {
+            try
+            {
+                using (var client = new System.Net.WebClient())
+                {
+                    string externalIP = client.DownloadString("https://api.ipify.org");
+                    return externalIP;
+                }
+            }
+            catch
+            {
+                return "Не удалось получить внешний IP";
+            }
+        }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            string localIP = GetLocalIPAddress();
+            string externalIP = GetExternalIPAddress();
+
+            MessageBox.Show(
+                $"🔌 Локальный IP: {localIP}\n🌐 Внешний IP: {externalIP}",
+                "IP-адреса",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information
+            );
+        }
     }
 }
