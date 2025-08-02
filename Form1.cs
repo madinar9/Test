@@ -246,5 +246,38 @@ namespace Управление_ЭВМ
         {
 
         }
+        private bool IsInternetAvailable()
+        {
+            try
+            {
+                using (var client = new System.Net.WebClient())
+                using (client.OpenRead("https://www.google.com/"))
+                {
+                    return true;
+                }
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click_2(object sender, EventArgs e)
+        {
+            if (IsInternetAvailable())
+            {
+                MessageBox.Show("Интернет доступен ✅", "Состояние сети", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("Интернет недоступен ❌", "Состояние сети", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+        }
     }
 }
