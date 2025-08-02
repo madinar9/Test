@@ -322,5 +322,16 @@ namespace Управление_ЭВМ
                 MessageBoxIcon.Information
             );
         }
+
+        private string GetWindowsUsername()
+        {
+            return Environment.UserName;
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            string username = GetWindowsUsername();
+            MessageBox.Show($"Имя пользователя: {username}", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
     }
 }
